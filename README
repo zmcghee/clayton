@@ -1,0 +1,3 @@
+I'm building a new personal website for myself. Along the way, I'm documenting the process by making the code public.
+
+You can see by looking at the .gitignore which files I've omitted for either cleanliness or safety reasons. In particular, there is a clayton/conf/secret.py file that is omitted because it contains sensitive information, like the database config.
