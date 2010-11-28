@@ -4,7 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('django.views.generic.simple',
-    (r'^$', 'direct_to_template', {'template': 'hello_world.html'}),
+    (r'^$', 'direct_to_template', {'template': 'resume.html'}),
 )
 
 urlpatterns += patterns('',

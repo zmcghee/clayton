@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Zack McGhee</title>
+<style type="text/css">
+body
+{
+	background: url('{{ MEDIA_URL }}themes/grayscale/gradient.gif') top left repeat-x #bbb;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	font-family: Georgia,Times,sans-serif;
+	font-size: .9em;
+}
+
+body p { line-height:1.3em !important; }
+
+h1,h2,h3,h4,h5,h6 { font-family: Amplitude,Tahoma,Helvetica,sans-serif; }
+
+#contact-link
+{
+	display: block;
+	background: #fcffdc;
+	padding: 1em;
+	float: right;
+}
+
+#outer-container
+{
+	width: 975px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+#tagline, #container, #footer
+{
+	background: #fff;
+	padding: 25px;
+}
+
+#tagline, #container { margin-bottom: 1em; }
+
+h1
+{
+	color: #fff;
+	font-size: 3em;
+	margin-bottom: .2em;
+}
+
+#tagline
+{
+	font-family: 'Hoefler Text',Georgia,Times,serif;
+	text-align: justify;
+	font-size: 1.4em;
+	line-height: 1.4em;
+}
+
+#tagline p { margin: 0; }
+
+#tagline p .highlight
+{
+	font-size: 2em;
+	line-height: 1em;
+}
+
+#tagline p:first-line { font-size: 2em; }
+#tagline p strong { font-style: italic; }
+#tagline p strong em { font-style: normal; }
+
+.polaroid
+{
+	padding: 18px 12px 65px 12px;
+	position: relative;
+	background: #fff;
+	border: 1px solid #c9c9c9;
+	-moz-box-shadow: 5px 5px 5px #c9c9c9;
+	-webkit-box-shadow: 5px 5px 5px #c9c9c9;
+	box-shadow: 5px 5px 5px #c9c9c9;
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+}
+
+.polaroid .caption
+{
+	position: absolute;
+	bottom: 0;
+	left: 12px;
+	height: 60px;
+	padding: 0;
+	margin: 0;
+	font-family: 'marker felt','comic sans','Comic Sans MS';
+	font-size: .8em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.polaroid.profile
+{
+	float: left;
+	margin: -4em 2em 1em -4em;
+}
+
+.left
+{
+	float: left;
+	margin: 1em;
+	margin-left: 0 !important;
+}
+
+.right
+{
+	float: right;
+	margin: 1em;
+	margin-right: 0 !important;
+}
+
+.box
+{
+	background: #fcffdc;
+	margin: 2em;
+	padding: 1em;
+	width: 350px;
+	font-family: arial,helvetica,sans-serif;
+	font-size: .9em;
+}
+
+.box h2, .box h3, .box h4, .box h5, .box h6 { font-family: helvetica,sans-serif; }
+
+.box h2
+{
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
+.top { margin-top: 0 !important; }
+h2.first { margin-top: 0; }
+
+#footer p
+{
+	font-family: arial,helvetica,sans-serif;
+	font-size: .9em;
+	color: #666;
+}
+</style>
+<!--[if IE]>
+<style type="text/css">
+.polaroid.profile
+{
+    float:left;
+    margin:0 1em 1em 0 !important;
+}
+.box { background:#ffc; }
+</style>
+<![endif]-->
+</head>
+<body>
+<div id="outer-container">
+<a id="contact-link" href="mailto:zackmcghee+website@gmail.com">Email Me</a>
+<h1>Zack McGhee</h1>
+<div id="tagline">
+<p><span class="highlight">I love solving problems,</span> <span class="highlight">and the best way I know how is through code:</span> artfully written, standards compliant, well tested, and accessible. I'm comfortable working with others to troubleshoot problems or establish project scope. I take pride in delivering a product on time that exceeds expectations. I love Python and Django. <strong>I believe functionality <em>is</em> design.</strong></p>
+</div>
+<div id="container">
+<div class="polaroid profile">
+<img src="{{ MEDIA_URL }}photos/zack_profile.jpg" alt="Zack McGhee" />
+<p class="caption">Howdy, I'm Zack.</p>
+</div>
+<div class="box top right">
+<h2 class="top">Employment History</h2>
+<h3>Manager, Software Innovations Lab, Cox Media Group Digital, 2010-Present</h3>
+<ul>
+	<li>Worked with the team to develop structure, expectations and process around the new Software Innovations Lab</li>
+	<li>14 Lab projects (enhancing CMS as well as experiments in HTML5, Boxee, iOS and Android)</li>
+	<li>More than 50% of Lab projects have been adopted and/or informed production code/architecture</li>
+	<li>Released 20-page internal Lab report describing the Lab's activity in 2010</li>
+	<li>Made multiple presentations to audiences of varying sizes across the company</li>
+	<li>Served on CMG Daily Deal SWAT team that recommended platform and strategy that lead to <a href="http://www.dealswarm.com/">DealSwarm</a></li>
+	<li>Developed oEmbed service and Django app for vendor video publishing within CMS</li>
+	<li>Project lead for Location-based Data within CMS (maps, geocoding, etc.)</li>
+	<li>Acted as tech liaison for iPad app project</li>
+</ul>
+<h3>Software Engineer / Digital Innovations Manager, Cox Ohio Publishing, 2004-2010</h3>
+<ul>
+	<li>As Digital Innovations Manager, oversaw and contributed to the redesign and relaunch of Order Entry e-commerce product (Place an Ad), Classified and Real Estate directories, and Customer Service (Circulation) websites</li>
+	<li>Ohio-based Technology, Sales & Marketing lead for implementation of Atlanta-based Content Management System in early 2009</li>
+	<li>Designed and developed homegrown "widget builder" that uses RSS feeds to aggregate content and tags it</li>
+	<li>Technical lead for the redesign of eight Cox Ohio newspaper websites in 2006, including <a href="http://www.daytondailynews.com/">DaytonDailyNews.com</a></li>
+	<li>Contributed to design and wrote most front-end templates for the launch of <a href="http://www.activedayton.com/">ActiveDayton.com</a> in 2008</li>
+	<li>Speaking engagement at 2008 UNITY conference in Chicago, "Beyond the E-Paper: Innovative Ways to Drive Web Site Traffic and Revenue," presented with digital leaders from Cox's Austin American-Statesman, Palm Beach Post, &amp; The Atlanta Journal Constitution</li>
+	<li>Built homegrown tool for tracking and managing email marketing templates and the advertising targeted to those products; integrated with email and SMS vendors</li>
+	<li>Completed a number of vendor integrations via APIs (e.g. HTTP/REST, SOAP)</li>
+	<li>Part of a team that supported over 40 applications or websites with internal and external customers</li>
+</ul>
+</div>
+<h2 class="top">Professional Experience</h2>
+<p>For nearly seven years, I have served as a digital media professional in Cox Media Group &mdash; first at Cox Ohio Publishing, and now in the role of Manager, Software Innovations Lab at Cox Media Group Digital in Atlanta.</p>
+<p>Prior to that, in December 2008, I was named COP's Digital Innovations Manager, leading a staff of six talented developers. In addition to working with Sales, Marketing, Editorial and Circulation in developing and enhancing web applications to meet their needs, we worked cooperatively with both local and remote IT professionals to hone best practices and improve performance.</p>
+<p>I love using technology to solve problems. I don't believe in building webpages so much as platforms that can power websites, mobile experiences, and applications. I'm building my skills in Python and Django; I'm already proficient in PHP, MySQL, XHTML, CSS and JavaScript. (I also have limited experience with PostgreSQL and MS SQL.) I have an awesome job at a terrific company, and I get to work with a lot of really great&mdash;and very smart&mdash;people.</p>
+<h2>Community &amp; Volunteerism</h2>
+<p>Before moving to Atlanta, I spent three years involved with the <a href="http://www.littleart.com/">Little Art Theatre</a> in Yellow Springs, Ohio. I chaired the Board of Trustees as it transitioned from a for-profit LLC to a nonprofit cinema in 2009. My work with the theatre continues as I built the Little Art's website (from a design by a local artist), which now runs on Django and PostgreSQL. In early 2011 I plan to open source the Django code that powers the Little Art's website.</p>
+<p>I also continue to organize and host an all-night <a href="http://www.ohiohorrorfest.com/">Horror Marathon</a> at the Little Art each October. In 2008 and 2009, as part of a worldwide effort known as <a href="http://www.cantstoptheserenity.com/">Can't Stop the Serenity</a>, I organized two screenings of Joss Whedon's scifi adventure, <em>Serenity</em> (2005); these screenings raised almost $2,000 in voluntary donations to benefit Equality Now.</p>
+<h2>Interests &amp; Hobbies</h2>
+<p>As you might imagine given my work with the Little Art Theatre, outside of my professional life, I'm a huge movie buff. In my spare time, I devour as many movies and as much film criticism as I can. My favorite movies are Alfred Hitchcock's <em>Rear Window</em> (1954) and Stanley Kubrick's <em>2001: A Space Odyssey</em> (1968). My favorite critics are Mike D'Angelo and Nathan Lee; I also enjoy reading Pauline Kael and Roger Ebert. I also like music and to read in my spare time.</p>
+<p>My partner, Tony, and I are new to the Atlanta area, so we're just getting to know the city. I hope to find time to write about our experiences exploring. I also recently became vegan, so I'm always trying to find new vegan-friendly restaurants, and am even beginning to learn how to cook. Finally, I spend far too much time on <a href="http://twitter.com/zmcghee">Twitter</a>; more infrequently, you can find me on <a href="http://www.flickr.com/photos/zmcghee/">Flickr</a> and <a href="http://www.facebook.com/zmcghee">Facebook</a>.</p>
+</div>
+<div id="footer">
+<p class="top"><strong>As I build this website,</strong> I'm documenting the process by making the code public. You can see all of <a href="http://github.com/zmcghee/clayton">the code that runs this website</a>, as well as some of my other personal projects, on Github. &bull; <strong>The views expressed on this website do not necessarily reflect those of my employer.</strong></p>
+</div>
+</div>
+</body>
+</html>
