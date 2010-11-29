@@ -4,153 +4,36 @@
 <head>
 <title>Zack McGhee</title>
 <style type="text/css">
-body
-{
-	background: url('{{ MEDIA_URL }}themes/grayscale/gradient.gif') top left repeat-x #bbb;
-	text-align: center;
-	margin: 0;
-	padding: 0;
-	font-family: Georgia,Times,sans-serif;
-	font-size: .9em;
-}
-
-body p { line-height:1.3em !important; }
-
-h1,h2,h3,h4,h5,h6 { font-family: Amplitude,Tahoma,Helvetica,sans-serif; }
-
-#contact-link
-{
-	display: block;
-	background: #fcffdc;
-	padding: 1em;
-	float: right;
-}
-
-#outer-container
-{
-	width: 975px;
-	margin: 0 auto;
-	text-align: left;
-}
-
-#tagline, #container, #footer
-{
-	background: #fff;
-	padding: 25px;
-}
-
-#tagline, #container { margin-bottom: 1em; }
-
-h1
-{
-	color: #fff;
-	font-size: 3em;
-	margin-bottom: .2em;
-}
-
-#tagline
-{
-	font-family: 'Hoefler Text',Georgia,Times,serif;
-	text-align: justify;
-	font-size: 1.4em;
-	line-height: 1.4em;
-}
-
-#tagline p { margin: 0; }
-
-#tagline p .highlight
-{
-	font-size: 2em;
-	line-height: 1em;
-}
-
-#tagline p:first-line { font-size: 2em; }
-#tagline p strong { font-style: italic; }
-#tagline p strong em { font-style: normal; }
-
-.polaroid
-{
-	padding: 18px 12px 65px 12px;
-	position: relative;
-	background: #fff;
-	border: 1px solid #c9c9c9;
-	-moz-box-shadow: 5px 5px 5px #c9c9c9;
-	-webkit-box-shadow: 5px 5px 5px #c9c9c9;
-	box-shadow: 5px 5px 5px #c9c9c9;
-	-webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
-}
-
-.polaroid .caption
-{
-	position: absolute;
-	bottom: 0;
-	left: 12px;
-	height: 60px;
-	padding: 0;
-	margin: 0;
-	font-family: 'marker felt','comic sans','Comic Sans MS';
-	font-size: .8em;
-	font-style: italic;
-	font-weight: bold;
-}
-
-.polaroid.profile
-{
-	float: left;
-	margin: -4em 2em 1em -4em;
-}
-
-.left
-{
-	float: left;
-	margin: 1em;
-	margin-left: 0 !important;
-}
-
-.right
-{
-	float: right;
-	margin: 1em;
-	margin-right: 0 !important;
-}
-
-.box
-{
-	background: #fcffdc;
-	margin: 2em;
-	padding: 1em;
-	width: 350px;
-	font-family: arial,helvetica,sans-serif;
-	font-size: .9em;
-}
-
-.box h2, .box h3, .box h4, .box h5, .box h6 { font-family: helvetica,sans-serif; }
-
-.box h2
-{
-	font-size: 1em;
-	text-transform: uppercase;
-}
-
-.top { margin-top: 0 !important; }
-h2.first { margin-top: 0; }
-
-#footer p
-{
-	font-family: arial,helvetica,sans-serif;
-	font-size: .9em;
-	color: #666;
-}
+body{background:url('{{ MEDIA_URL }}themes/grayscale/gradient.gif') top left repeat-x #bbb;text-align:center;font-family:Georgia,Times,sans-serif;font-size:.9em;margin:0;padding:0}
+body p{line-height:1.3em!important}
+h1,h2,h3,h4,h5,h6{font-family:Amplitude,Tahoma,Helvetica,sans-serif}
+#contact-link{display:block;background:#fcffdc;float:right;padding:1em}
+#outer-container{width:975px;text-align:left;margin:0 auto}
+#tagline,#container,#footer{background:#fff;padding:25px}
+#tagline,#container{margin-bottom:1em}
+h1{color:#fff;font-size:3em;margin-bottom:.2em}
+#tagline{font-family:'Hoefler Text',Georgia,Times,serif;text-align:justify;font-size:1.4em;line-height:1.4em}
+#tagline p{margin:0}
+#tagline p .highlight{font-size:2em;line-height:1em}
+#tagline p:first-line{font-size:2em}
+#tagline p strong{font-style:italic}
+#tagline p strong em{font-style:normal}
+.polaroid{position:relative;background:#fff;border:1px solid #c9c9c9;-moz-box-shadow:5px 5px 5px #c9c9c9;-webkit-box-shadow:5px 5px 5px #c9c9c9;box-shadow:5px 5px 5px #c9c9c9;-webkit-transform:rotate(-2deg);-moz-transform:rotate(-2deg);padding:18px 12px 65px}
+.polaroid .caption{position:absolute;bottom:0;left:12px;height:60px;font-family:'marker felt','comic sans','Comic Sans MS';font-size:.8em;font-style:italic;font-weight:700;margin:0;padding:0}
+.polaroid.profile{float:left;margin:-4em 2em 1em -4em}
+.left{float:left;margin:1em 1em 1em 0 !important}
+.right{float:right;margin:1em 0 1em 1em !important}
+.box{background:#fcffdc;width:350px;font-family:arial,helvetica,sans-serif;font-size:.9em;margin:2em;padding:1em}
+.box h2,.box h3,.box h4,.box h5,.box h6{font-family:helvetica,sans-serif}
+.box h2{font-size:1em;text-transform:uppercase}
+.top{margin-top:0!important}
+h2.first{margin-top:0}
+#footer p{font-family:arial,helvetica,sans-serif;font-size:.9em;color:#666}
 </style>
 <!--[if IE]>
 <style type="text/css">
-.polaroid.profile
-{
-    float:left;
-    margin:0 1em 1em 0 !important;
-}
-.box { background:#ffc; }
+.polaroid.profile{float:left;margin:0 1em 1em 0 !important}
+.box{background:#ffc}
 </style>
 <![endif]-->
 </head>
@@ -170,27 +53,27 @@ h2.first { margin-top: 0; }
 <h2 class="top">Employment History</h2>
 <h3>Manager, Software Innovations Lab, Cox Media Group Digital, 2010-Present</h3>
 <ul>
-	<li>Worked with the team to develop structure, expectations and process around the new Software Innovations Lab</li>
-	<li>14 Lab projects (enhancing CMS as well as experiments in HTML5, Boxee, iOS and Android)</li>
-	<li>More than 50% of Lab projects have been adopted and/or informed production code/architecture</li>
-	<li>Released 20-page internal Lab report describing the Lab's activity in 2010</li>
-	<li>Made multiple presentations to audiences of varying sizes across the company</li>
-	<li>Served on team that recommended platform and strategy for Daily Deal offering</li>
-	<li>Developed oEmbed service and Django app for vendor video publishing within CMS</li>
-	<li>Project lead for Location-based Data within CMS (maps, geocoding, etc.)</li>
-	<li>Acted as tech liaison for iPad app project</li>
+<li>Worked with the team to develop structure, expectations and process around the new Software Innovations Lab</li>
+<li>14 Lab projects (enhancing CMS as well as experiments in HTML5, Boxee, iOS and Android)</li>
+<li>More than 50% of Lab projects have been adopted and/or informed production code/architecture</li>
+<li>Released 20-page internal Lab report describing the Lab's activity in 2010</li>
+<li>Made multiple presentations to audiences of varying sizes across the company</li>
+<li>Served on team that recommended platform and strategy for Daily Deal offering</li>
+<li>Developed oEmbed service and Django app for vendor video publishing within CMS</li>
+<li>Project lead for Location-based Data within CMS (maps, geocoding, etc.)</li>
+<li>Acted as tech liaison for iPad app project</li>
 </ul>
 <h3>Software Engineer / Digital Innovations Manager, Cox Ohio Publishing, 2004-2010</h3>
 <ul>
-	<li>As Digital Innovations Manager, oversaw and contributed to the redesign and relaunch of Order Entry e-commerce product (Place an Ad), Classified and Real Estate directories, and Customer Service (Circulation) websites</li>
-	<li>Ohio-based Technology, Sales & Marketing lead for implementation of Atlanta-based Content Management System in early 2009</li>
-	<li>Designed and developed homegrown "widget builder" that uses RSS feeds to aggregate content and tags it</li>
-	<li>Technical lead for the redesign of eight Cox Ohio newspaper websites in 2006, including <a href="http://www.daytondailynews.com/">DaytonDailyNews.com</a></li>
-	<li>Contributed to design and wrote most front-end templates for the launch of <a href="http://www.activedayton.com/">ActiveDayton.com</a> in 2008</li>
-	<li>Speaking engagement at 2008 UNITY conference in Chicago, "Beyond the E-Paper: Innovative Ways to Drive Web Site Traffic and Revenue," presented with digital leaders from Cox's Austin American-Statesman, Palm Beach Post, &amp; The Atlanta Journal Constitution</li>
-	<li>Built homegrown tool for tracking and managing email marketing templates and the advertising targeted to those products; integrated with email and SMS vendors</li>
-	<li>Completed a number of vendor integrations via APIs (e.g. HTTP/REST, SOAP)</li>
-	<li>Part of a team that supported over 40 applications or websites with internal and external customers</li>
+<li>As Digital Innovations Manager, oversaw and contributed to the redesign and relaunch of Order Entry e-commerce product (Place an Ad), Classified and Real Estate directories, and Customer Service (Circulation) websites</li>
+<li>Ohio-based Technology, Sales & Marketing lead for implementation of Atlanta-based Content Management System in early 2009</li>
+<li>Designed and developed homegrown "widget builder" that uses RSS feeds to aggregate content and tags it</li>
+<li>Technical lead for the redesign of eight Cox Ohio newspaper websites in 2006, including <a href="http://www.daytondailynews.com/">DaytonDailyNews.com</a></li>
+<li>Contributed to design and wrote most front-end templates for the launch of <a href="http://www.activedayton.com/">ActiveDayton.com</a> in 2008</li>
+<li>Speaking engagement at 2008 UNITY conference in Chicago, "Beyond the E-Paper: Innovative Ways to Drive Web Site Traffic and Revenue," presented with digital leaders from Cox's Austin American-Statesman, Palm Beach Post, &amp; The Atlanta Journal Constitution</li>
+<li>Built homegrown tool for tracking and managing email marketing templates and the advertising targeted to those products; integrated with email and SMS vendors</li>
+<li>Completed a number of vendor integrations via APIs (e.g. HTTP/REST, SOAP)</li>
+<li>Part of a team that supported over 40 applications or websites with internal and external customers</li>
 </ul>
 </div>
 <h2 class="top">Professional Experience</h2>
