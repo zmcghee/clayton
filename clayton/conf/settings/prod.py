@@ -1,10 +1,10 @@
-from clayton.conf.secret import SECRET_KEY as SUPER_SECRET_KEY, TEST_ENV_PATH, TEST_DATABASE
+from clayton.conf.secret import SECRET_KEY as SUPER_SECRET_KEY, PROD_ENV_PATH, PROD_DATABASE
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
-    'default': TEST_DATABASE 
+    'default': PROD_DATABASE 
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -37,12 +37,12 @@ MEDIA_ROOT = ""
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://static.zmcghee.webfactional.com/media/'
+MEDIA_URL = 'http://static.zackmcghee.com/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = 'http://static.zmcghee.webfactional.com/media/admin/'
+ADMIN_MEDIA_PREFIX = 'http://static.zackmcghee.com/media/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = SUPER_SECRET_KEY 
@@ -73,7 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ROOT_URLCONF = 'clayton.urls'
 
 TEMPLATE_DIRS = (
-    '%s/templates/' % TEST_ENV_PATH,
+    '%s/templates/' % PROD_ENV_PATH,
 )
 
 INSTALLED_APPS = (
