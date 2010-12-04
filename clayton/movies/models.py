@@ -34,6 +34,7 @@ class FilmLog(models.Model):
 	rating = models.CharField(max_length=1, choices=RATING_CHOICES, db_index=True)
 	is_print = models.BooleanField("35mm screening")
 	is_repeat_viewing = models.BooleanField("repeat viewing")
+	is_nonfiction = models.BooleanField("Documentary", default=False)
 	notes = models.TextField(blank=True, null=True)
 
 	def __unicode__(self):
