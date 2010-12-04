@@ -38,7 +38,7 @@
         }
     }, 
     {
-        "pk": 2, 
+        "pk": 1, 
         "model": "books.booklog", 
         "fields": {
             "book_title": "Afterglow: A Last Conversation With Pauline Kael", 
@@ -52,7 +52,7 @@
         }
     }, 
     {
-        "pk": 1, 
+        "pk": 2, 
         "model": "books.booklog", 
         "fields": {
             "book_title": "Just Kids", 
