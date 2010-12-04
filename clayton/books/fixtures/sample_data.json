@@ -1,0 +1,68 @@
+[
+    {
+        "pk": 3, 
+        "model": "books.author", 
+        "fields": {
+            "surname": "Carter", 
+            "given_name": "Bill"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "books.author", 
+        "fields": {
+            "surname": "Davis", 
+            "given_name": "Francis"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "books.author", 
+        "fields": {
+            "surname": "Smith", 
+            "given_name": "Patti"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "books.booklog", 
+        "fields": {
+            "book_title": "The War for Late Night: When Leno Went Early and Television Went Crazy", 
+            "is_repeat_reading": false, 
+            "author": 3, 
+            "date_finished": "2010-12-01", 
+            "is_nonfiction": true, 
+            "notes": "", 
+            "isbn_13": "978-0670022083", 
+            "isbn_10": "067002208X"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "books.booklog", 
+        "fields": {
+            "book_title": "Afterglow: A Last Conversation With Pauline Kael", 
+            "is_repeat_reading": false, 
+            "author": 2, 
+            "date_finished": "2010-11-20", 
+            "is_nonfiction": true, 
+            "notes": "Date finished is a guess", 
+            "isbn_13": "978-0306812309", 
+            "isbn_10": "0306812304"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "books.booklog", 
+        "fields": {
+            "book_title": "Just Kids", 
+            "is_repeat_reading": false, 
+            "author": 1, 
+            "date_finished": "2010-11-25", 
+            "is_nonfiction": true, 
+            "notes": "Date finished is a guess", 
+            "isbn_13": "978-0060936228", 
+            "isbn_10": "0060936223"
+        }
+    }
+]
