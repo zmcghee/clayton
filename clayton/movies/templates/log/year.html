@@ -1,0 +1,16 @@
+<h2>{{ year }} film log</h2>
+{% if date_list %}
+<ul>
+{% for month in date_list %}
+<li><a href="{% url filmlog_archive_month year month|date:"m" %}">{{ month|date:"F" }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No results</p>
+{% endif %}
+<ul>
+{% if year != current_year %}
+<li class="next-page">{{ year|add:"1" }}</li>
+{% endif %}
+<li class="previous-page">{{ year|add:"-1" }}</li>
+</ul>

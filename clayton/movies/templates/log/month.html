@@ -1,0 +1,53 @@
+<h2>{{ month|date:"F Y" }} film log</h2>
+{% if movie_list %}
+<ul>
+{% for entry in movie_list %}
+<li
+{% if entry.rating > "4" %}
+    style="background:lime;font-weight:bold;"
+{% endif %}
+{% if entry.rating == "4" %}
+    style="background:yellow;font-weight:bold;"
+{% endif %}
+>
+    {% if entry.repeat_viewing %}/{% endif %}
+    {% if entry.imdb_id %}<a href="http://imdb.com/title/tt{{ entry.imdb_id }}">{% endif %}
+        {{ entry.movie_title }}
+    {% if entry.imdb_id %}</a>{% endif %}
+    {% if entry.repeat_viewing %}/{% endif %}
+    ({{ entry.release_year }})<br />
+    <small>
+        {% if entry.rating > "4" %}
+            Highly recommended
+        {% else %}
+        {% if entry.rating < "3" %}
+            Not recommended
+        {% endif %}
+        {% if entry.rating == "3" %}
+            Recommended with reservations
+        {% endif %}
+        {% if entry.rating == "4" %}
+            Recommended
+        {% endif %}
+        {% endif %}
+    </small>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No results</p>
+{% endif %}
+<ul>
+{% if next_month %}
+<li class="next-page">
+    <a href="{% url filmlog_archive_month next_month|date:"Y" next_month|date:"m" %}">
+        {{ next_month|date:"F Y" }}
+    </a>
+</li>
+{% endif %}
+<li class="previous-page">
+    <a href="{% url filmlog_archive_month previous_month|date:"Y" previous_month|date:"m" %}">
+        {{ previous_month|date:"F Y" }}
+    </a>
+</li>
+</ul>
