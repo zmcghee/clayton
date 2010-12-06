@@ -1,0 +1,61 @@
+<tr id="expanded-entry-{{ entry.pk }}" class="expanded-entry-notes">
+<td class="collapse-expanded">
+    <a href="?#"><img src="{{ MEDIA_URL }}icons/up.png" alt="Collapse" /> Collapse</a>
+</td>
+<td colspan="3" class="review">
+<div class="review-text">
+{% if entry.notes %}
+{{ entry.notes|safe|linebreaks }}
+{% else %}
+<p>I haven't written anything about <em>{{ entry.movie_title }}</em> yet. I know, I know, I'm useless.</p>
+{% endif %}
+</div>
+</td>
+<td class="screening-notes">
+<h3>
+    {% spaceless %}{% if entry.venue.city and entry.venue.state %}
+    <img src="{{ MEDIA_URL }}icons/check.png" alt="Yes" />
+    {% else %}
+    <img src="{{ MEDIA_URL }}icons/delete.png" alt="No" />
+    {% endif %}{% endspaceless %}
+    Theatrical viewing
+    {% if entry.venue.city and entry.venue.state %}&nbsp;&nbsp;&nbsp;
+    {% spaceless %}{% if entry.is_print %}
+    <img src="{{ MEDIA_URL }}icons/check.png" alt="Yes" />
+    {% else %}
+    <img src="{{ MEDIA_URL }}icons/delete.png" alt="No" />
+    {% endif %}{% endspaceless %}
+    35mm print
+    {% endif %}
+</h3>
+<p>I saw <em>{{ entry.movie_title }}</em> {% spaceless %}
+    {% if entry.venue.city and entry.venue.state %}
+        in an honest-to-flog movie theater, projected {% spaceless %}
+        {% if entry.is_print %}
+            in 35mm and everything!
+        {% else %}
+            in one of those fancy (or perhaps not-so-fancy) digital formats.
+        {% endif %}
+    {% endspaceless %}{% else %}
+        at home, like the demanding, super-modern, instant-gratificationalist consumer that I am.
+    {% endif %}
+{% endspaceless %}</p>
+<h3>
+    {% spaceless %}{% if entry.is_repeat_viewing %}
+    <img src="{{ MEDIA_URL }}icons/check.png" alt="Yes" />
+    {% else %}
+    <img src="{{ MEDIA_URL }}icons/delete.png" alt="No" />
+    {% endif %}{% endspaceless %}
+    Repeat viewing
+</h3>
+{% if entry.is_repeat_viewing and entry.venue.city and entry.venue.state %}
+<p>This was not my first time seeing <em>{{ entry.movie_title }}</em>, although it may have been the first time I saw it in a movie theater.</p>
+{% else %}
+<p>This was my first-ever viewing of <em>{{ entry.movie_title }}</em>{% if entry.rating < "3" %}, and with any luck it was also my last{% endif %}.</p>
+{% endif %}
+{% if entry.imdb_id %}
+<h3>The Internet Movie Database</h3>
+<p><a href="http://www.imdb.com/title/tt{{ entry.imdb_id }}/">{{ entry.movie_title }}</a></p>
+{% endif %}
+</td>
+</tr>

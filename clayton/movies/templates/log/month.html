@@ -1,53 +1,260 @@
-<h2>{{ month|date:"F Y" }} film log</h2>
-{% if movie_list %}
-<ul>
-{% for entry in movie_list %}
-<li
-{% if entry.rating > "4" %}
-    style="background:lime;font-weight:bold;"
-{% endif %}
-{% if entry.rating == "4" %}
-    style="background:yellow;font-weight:bold;"
-{% endif %}
->
-    {% if entry.repeat_viewing %}/{% endif %}
-    {% if entry.imdb_id %}<a href="http://imdb.com/title/tt{{ entry.imdb_id }}">{% endif %}
-        {{ entry.movie_title }}
-    {% if entry.imdb_id %}</a>{% endif %}
-    {% if entry.repeat_viewing %}/{% endif %}
-    ({{ entry.release_year }})<br />
-    <small>
-        {% if entry.rating > "4" %}
-            Highly recommended
-        {% else %}
-        {% if entry.rating < "3" %}
-            Not recommended
-        {% endif %}
-        {% if entry.rating == "3" %}
-            Recommended with reservations
-        {% endif %}
-        {% if entry.rating == "4" %}
-            Recommended
-        {% endif %}
-        {% endif %}
-    </small>
-</li>
-{% endfor %}
-</ul>
-{% else %}
-<p>No results</p>
-{% endif %}
+{% extends "base.html" %}
+{# This template requires the django.core.context_processors.request be installed #}
+
+{% block page_title %}
+{{ month|date:"F Y" }} film log
+{% endblock %}
+
+{% block css %}
+body { padding:0;margin:0; }
+a img { border:0; }
+h1 { margin:0;padding:15px 25px;background:#36d;color:#fff;font-weight:normal;font-family:georgia;font-size:3em; }
+h1 a { display:block;color:#fff;text-decoration:none; }
+h2 { font-family:helvetica,arial,sans-serif;margin-top:0;margin-bottom:0 !important; padding-bottom:0 !important; }
+.summary p.breadcrumbs { margin-top:0 !important; padding-top:0 !important; }
+#container { padding:25px;padding-top:0; }
+p.breadcrumbs { font-size:.7em !important;font-family:tahoma,times,serif; }
+.summary { font-size:1.2em !important; }
+.key { float:right;padding-left:2em; }
+.key h2 { font-size:.9em;text-transform:uppercase;background:#36d;color:#fff;padding:3px 5px !important;margin-top:1em; }
+.key ul { margin-top:0; }
+.key ul, #ratings-key li { margin-left:0;padding-left:0;list-style:none;list-style-type:none; }
+.key li { margin:.7em 0;font-family:helvetica,arial,sans-serif;font-size:.9em; }
+#ratings-key li { padding-left:.5em;border-left:1em solid #ccc; }
+#ratings-key li.highly-recommended { border-color:green;font-weight:bold; }
+#ratings-key li.recommended { border-color:lime; }
+#ratings-key li.mixed { border-color:yellow; }
+#ratings-key li.not-recommended { border-color:red; }
+/* Log table */
+table.filmlog { width:100%;font-family:helvetica,arial,sans-serif;font-size:.9em;border-bottom:1px solid #ccc; }
+table.filmlog thead tr td { background:#ffe;font-weight:bold; }
+table.filmlog td { padding:.8em;border-top:1px solid #ccc;border-right:1px dashed #ddd; }
+table.filmlog tr.highly-recommended td.movie-title a { border-left:1em solid green; }
+table.filmlog tr.highly-recommended td.movie-title a, table.filmlog tr.highly-recommended td.rating { font-weight:bold; }
+table.filmlog tr.recommended td.movie-title a { border-left:1em solid lime; }
+table.filmlog tr.mixed td.movie-title a { border-left:1em solid yellow; }
+table.filmlog tr.not-recommended td.movie-title a { border-left:1em solid red; }
+table.filmlog td.date, table.filmlog td.rating { white-space:nowrap; }
+table.filmlog td.movie-title a { font-size:1.2em;padding-left:.5em; }
+table.filmlog tr.log-entry td a { text-decoration:none; }
+table.filmlog td.venue { border-right:0 !important;width:29%; }
+span.venue-location { font-size:.8em;color:#aaa; }
+/* Expanded entry */
+table.filmlog tr.log-entry.expanded td, table.filmlog tr.expanded-entry-notes td { background:#ffe; }
+table.filmlog tr.log-entry.expanded td { border-right:0;font-weight:bold; }
+table.filmlog tr.expanded-entry-notes td { border:0;vertical-align:top; }
+table.filmlog tr.expanded-entry-notes td.collapse-expanded { vertical-align:middle;text-align:center; }
+table.filmlog tr.expanded-entry-notes td.collapse-expanded a { text-decoration:none; }
+table.filmlog tr.expanded-entry-notes td.collapse-expanded a img { display:block;margin:1em auto; }
+table.filmlog tr.expanded-entry-notes td p { margin-top:0; }
+.summary, table.filmlog tr.expanded-entry-notes td.review { font-family:garamond,georgia,times,serif;font-size:1.1em;line-height:1.5em; }
+table.filmlog tr.expanded-entry-notes td.screening-notes h3 { margin-top:0;margin-bottom:.3em;font-weight:normal; }
+table.filmlog tr td img { vertical-align:middle; }
+table.filmlog tr.expanded-entry-notes td.screening-notes p { margin-bottom:2em; }
+table.filmlog tr td.notes, table.filmlog tr td.review { border-right:1px dashed #ddd !important; }
+/* Relative navigation */
+.rel-nav { clear:both;margin-bottom:2em; }
+.rel-nav ul, .rel-nav li { list-style:none;list-style-type:none;margin:0;padding:0; }
+.rel-nav .next-page { float:right; }
+.rel-nav li { padding:1em 0;font-family:georgia;font-size:1em; }
+.rel-nav a { text-decoration:none; }
+/* Footer */
+.footer { border-top:1px dashed #666; }
+.footer p{font-family:arial,helvetica,sans-serif;font-size:.9em;color:#666}
+{% endblock %}
+
+{% block head %}
+<script src="{{ MEDIA_URL }}js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+function collapse_this(entry_id){
+    $("#entry-" + entry_id).removeClass("expanded");
+    $("#expanded-entry-" + entry_id).remove();
+    return false;
+}
+$(document).ready(function(){
+    $("table.filmlog tr.log-entry").each(function(){
+        var entry_id = $(this).attr("id").substr(6);
+        var expand_this = function(){
+            if($("#entry-" + entry_id).hasClass("expanded") && $("#expanded-entry-" + entry_id))
+            {
+                // Already expanded
+                collapse_this(entry_id);
+            }
+            else
+            {
+                $("#entry-" + entry_id).addClass("expanded");
+                // Loading (haven't added this because it's currently so fast, I don't need it)
+                $.ajax({
+                   type: "GET",
+                   url: "/movies/log/entry/" + entry_id + "/",
+                   complete: function(){
+                    // Done loading
+                   },
+                   success: function(html){
+                     // Kill loading
+                     $("#entry-" + entry_id).after(html);
+                     $("#expanded-entry-" + entry_id + " .collapse-expanded a").click(function(){
+                        collapse_this(entry_id);
+                     });
+                   },
+                   error: function(XMLHttpRequest, textStatus, errorThrown){
+                     // There was an error
+                     $("#entry-" + entry_id).removeClass("expanded");
+                   }
+                 });
+             }
+             return false;
+        };
+        $(this).find(".movie-title a").click(expand_this);
+        $(this).find(".notes a").click(expand_this);
+    });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<h1><a href="/movies/log/">Film Log</a></h1>
+<div id="container">
+<div class="rel-nav">
 <ul>
 {% if next_month %}
 <li class="next-page">
     <a href="{% url filmlog_archive_month next_month|date:"Y" next_month|date:"m" %}">
-        {{ next_month|date:"F Y" }}
+        {{ next_month|date:"F Y" }} &raquo;
     </a>
 </li>
 {% endif %}
 <li class="previous-page">
     <a href="{% url filmlog_archive_month previous_month|date:"Y" previous_month|date:"m" %}">
-        {{ previous_month|date:"F Y" }}
+        &laquo; {{ previous_month|date:"F Y" }}
     </a>
 </li>
 </ul>
+</div>
+<div class="key">
+<h2>Other Icons</h2>
+<ul>
+<li><img src="{{ MEDIA_URL }}icons/refresh.png" alt="Repeat Viewing" title="Repeat Viewing" align="top" /> Repeat viewing</li>
+<li><img src="{{ MEDIA_URL }}icons/doc.png" alt="Notes" align="top" /> I've written a review</li>
+<li><img src="{{ MEDIA_URL }}icons/blank.png" alt="Notes" align="top" /> I haven't yet written a review</li>
+</ul>
+</div>
+<div id="ratings-key" class="key">
+<h2>Ratings Key</h2>
+<ul>
+<li class="highly-recommended">Highly recommended</li>
+<li class="recommended">Recommended</li>
+<li class="mixed">Mixed</li>
+<li class="not-recommended">Not recommended</li>
+</ul>
+</div>
+<div class="summary">
+<h2>{{ month|date:"F Y" }}</h2>
+<p class="breadcrumbs">
+    <a href="/">Zack McGhee</a> &raquo; {% if next_month %}
+    <a href="/movies/log/">
+    {% endif %}Film Log{% if next_month %}
+    </a> &raquo;{% comment %} <a href="{% url filmlog_archive_year month|date:"Y" %}">{{ month|date:"Y" }}</a> &raquo;{% endcomment %} {{ month|date:"F Y" }}{% endif %}
+</p>
+{% if movie_list %}
+<p>This is the log of films that {% if next_month %}I saw{% else %}I've seen so far{% endif %} in {{ month|date:"F Y" }}. Included are all the feature-length (45 minutes or longer) movies that {% if next_month %}I saw{% else %}I have seen{% endif %} theatrically, as well as first-time viewings of movies that I watched at home. I also consume a fair amount of TV and movie content that I've already seen at least once via my phone, computer and TV, but this is usually while I'm working or otherwise occupied; I don't log these viewings, because I usually don't have my full attention devoted to the film. <em>&nbsp;&mdash;Zack&nbsp;McGhee</em></p>
+{% else %}
+<p><strong>Sorry, there are no entries for {{ month|date:"F Y" }}.</strong> I'm afraid I just started keeping this log in <a href="{% url filmlog_archive_month 2010 11 %}">November 2010</a>.</p>
+{% endif %}
+</div>
+{% if movie_list %}
+<table class="filmlog" border="0" cellpadding="0" cellspacing="0">
+<thead>
+<tr>
+    <td class="date">Date Seen</td>
+    <td class="movie-title">Movie</td>
+    <td class="rating" colspan="2">My Rating</td>
+    <td class="venue">Venue</td>
+</tr>
+</thead>
+<tbody>
+{% for entry in movie_list %}
+<tr id="entry-{{ entry.pk }}" class="{% if request.GET.expand == entry.pk|stringformat:"s" %}expanded {% endif %}log-entry {% spaceless %}
+{% if entry.rating > "4" %}
+    highly-recommended
+{% endif %}
+{% if entry.rating == "4" %}
+    recommended
+{% endif %}
+{% if entry.rating == "3" %}
+    mixed
+{% endif %}
+{% if entry.rating < "3" %}
+    not-recommended
+{% endif %}
+{% endspaceless %} {% spaceless %}
+{% if entry.is_repeat_viewing %}
+    repeat-viewing
+{% endif %}{% endspaceless %}">
+    <td class="date"><span>{{ entry.date }}</span></td>
+    <td class="movie-title"><span>{% spaceless %}
+            <a href="?expand={{ entry.pk }}#entry-{{ entry.pk }}">
+    {% endspaceless %}{{ entry.movie_title }}{% spaceless %}
+            </a>
+    {% endspaceless %} ({{ entry.release_year }}){% if entry.is_repeat_viewing %} {% spaceless %}
+            <img src="{{ MEDIA_URL }}icons/refresh.png" alt="Repeat Viewing" title="Repeat Viewing" />
+    {% endspaceless %}{% endif %}</span></td>
+    <td class="rating"><span>{% spaceless %}
+        {% if entry.rating > "4" %}
+            Highly Recommended
+        {% endif %}
+        {% if entry.rating == "4" %}
+            Recommended
+        {% endif %}
+        {% if entry.rating == "3" %}
+            Mixed
+        {% endif %}
+        {% if entry.rating < "3" %}
+            Not Recommended
+        {% endif %}
+    {% endspaceless %}</span></td>
+    <td class="notes{% if not entry.notes %} empty{% endif %}"><span>{% spaceless %}
+        <a href="?expand={{ entry.pk }}#entry-{{ entry.pk }}">
+        {% if entry.notes %}
+            <img src="{{ MEDIA_URL }}icons/doc.png" alt="Review" />
+        {% else %}
+            <img src="{{ MEDIA_URL }}icons/blank.png" alt="No Review" />
+        {% endif %}{% endspaceless %} Notes{% spaceless %}
+        </a>
+    {% endspaceless %}</span></td>
+    <td class="venue"><span>{% spaceless %}
+        {% if entry.venue.url %}<a href="{{ entry.venue.url }}">{% endif %}
+    {% endspaceless %}{{ entry.venue.name }}{% spaceless %}
+        {% if entry.venue.url %}</a>{% endif %}
+    {% endspaceless %}{% if entry.venue.city and entry.venue.state %}
+        <span class="venue-location">{{ entry.venue.city }}, {{ entry.venue.state }}</span>
+    {% endif %}</span></td>
+</tr>
+{% if request.GET.expand == entry.pk|stringformat:"s" %}
+{% include "log/expanded_entry.html" %}
+{% endif %}
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+<div class="rel-nav">
+<ul>
+{% if next_month %}
+<li class="next-page">
+    <a href="{% url filmlog_archive_month next_month|date:"Y" next_month|date:"m" %}">
+        {{ next_month|date:"F Y" }} &raquo;
+    </a>
+</li>
+{% endif %}
+<li class="previous-page">
+    <a href="{% url filmlog_archive_month previous_month|date:"Y" previous_month|date:"m" %}">
+        &laquo; {{ previous_month|date:"F Y" }}
+    </a>
+</li>
+</ul>
+</div>
+<div class="footer">
+<p>Icons used for "Notes," "Repeat Viewing" and "Collapse" were made available for my use under the terms of <a href="http://www.iconarchive.com/icons/visualpharm/must-have/License.txt">this license</a> by <a href="http://www.visualpharm.com/">VisualPharm</a> (Ivan Boyko).</p>
+</div>
+</div>
+{% endblock %}

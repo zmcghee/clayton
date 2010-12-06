@@ -30,3 +30,7 @@ urlpatterns += patterns('django.views.generic.simple',
     	'permanent': False
     }),
 )
+
+urlpatterns += patterns('clayton.movies.views',
+    url(r'^log/entry/(?P<id>\d+)/$', 'filmlog_entry_detail', name='filmlog_entry'),
+)
