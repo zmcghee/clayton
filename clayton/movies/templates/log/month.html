@@ -78,7 +78,7 @@ $(document).ready(function(){
             if($("#entry-" + entry_id).hasClass("expanded") && $("#expanded-entry-" + entry_id))
             {
                 // Already expanded
-                collapse_this(entry_id);
+                return collapse_this(entry_id);
             }
             else
             {
@@ -94,7 +94,7 @@ $(document).ready(function(){
                      // Kill loading
                      $("#entry-" + entry_id).after(html);
                      $("#expanded-entry-" + entry_id + " .collapse-expanded a").click(function(){
-                        collapse_this(entry_id);
+                        return collapse_this(entry_id);
                      });
                    },
                    error: function(XMLHttpRequest, textStatus, errorThrown){
