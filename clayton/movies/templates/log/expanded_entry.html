@@ -48,8 +48,8 @@
     {% endif %}{% endspaceless %}
     Repeat viewing
 </h3>
-{% if entry.is_repeat_viewing and entry.venue.city and entry.venue.state %}
-<p>This was not my first time seeing <em>{{ entry.movie_title }}</em>, although it may have been the first time I saw it in a movie theater.</p>
+{% if entry.is_repeat_viewing %}
+<p>This was not my first time seeing <em>{{ entry.movie_title }}</em>{% if entry.venue.city and entry.venue.state %}, although it may have been the first time I saw it in a movie theater{% endif %}.</p>
 {% else %}
 <p>This was my first-ever viewing of <em>{{ entry.movie_title }}</em>{% if entry.rating < "3" %}, and with any luck it was also my last{% endif %}.</p>
 {% endif %}
