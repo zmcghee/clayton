@@ -42,5 +42,5 @@ class FilmLog(models.Model):
 		return "%s - %s" % (self.date, self.movie_title)
 
 	class Meta:
-		ordering = ('-id',)
+		ordering = ('-date', '-id',)
 		verbose_name_plural = "Film log"
