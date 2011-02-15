@@ -26,7 +26,7 @@ urlpatterns = patterns('django.views.generic.date_based',
 urlpatterns += patterns('django.views.generic.simple',
     ('^log/$', 'redirect_to', {
     	'url': reverse('filmlog_archive_month', args=[
-    		datetime.today().year, datetime.today().month]),
+    		datetime.today().year, ('0%s' % datetime.today().month) if datetime.today().month < 10 else datetime.today().month]),
     	'permanent': False
     }),
 )
