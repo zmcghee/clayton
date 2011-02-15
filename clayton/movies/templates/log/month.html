@@ -157,7 +157,7 @@ $(document).ready(function(){
     </a> &raquo;{% comment %} <a href="{% url filmlog_archive_year month|date:"Y" %}">{{ month|date:"Y" }}</a> &raquo;{% endcomment %} {{ month|date:"F Y" }}{% endif %}
 </p>
 {% if movie_list %}
-<p>This is the log of films that {% if next_month %}I saw{% else %}I've seen so far{% endif %} in {{ month|date:"F Y" }}. Included are all the feature-length (45 minutes or longer) movies that {% if next_month %}I saw{% else %}I have seen{% endif %} theatrically, as well as first-time viewings of movies that I watched at home. I also consume a fair amount of TV and movie content that I've already seen at least once via my phone, computer and TV, but this is usually while I'm working or otherwise occupied; I don't log these viewings, because I usually don't have my full attention devoted to the film. <em>&nbsp;&mdash;Zack&nbsp;McGhee</em></p>
+<p>This is the log of films that {% if next_month %}I saw{% else %}I've seen so far{% endif %} in {{ month|date:"F Y" }}. Included are all the feature-length (45 minutes or longer) movies that {% if next_month %}I saw{% else %}I have seen{% endif %} theatrically, as well as first-time viewings of movies that I watched at home. I also consume a fair amount of TV and movie content that I've already seen at least once via my phone, computer and TV, but this is usually while I'm working or otherwise occupied; I don't log these viewings unless I have my full attention devoted to the film. <em>&nbsp;&mdash;Zack&nbsp;McGhee</em></p>
 {% else %}
 <p><strong>Sorry, there are no entries for {{ month|date:"F Y" }}.</strong> I'm afraid I just started keeping this log in <a href="{% url filmlog_archive_month 2010 11 %}">November 2010</a>.</p>
 {% endif %}
